@@ -96,6 +96,25 @@ export interface RulePreview {
   }[];
 }
 
+export interface SchemaField {
+  name: string;
+  label: string;
+  type: "boolean" | "number" | "string";
+  operators: string[];
+  defaultOperator: string;
+  defaultValue?: boolean | number | string;
+}
+
+export interface EventTypeSchema {
+  eventType: number;
+  name: string;
+  category: string;
+  description: string;
+  fields: SchemaField[];
+}
+
+export type RuleSchema = EventTypeSchema[];
+
 export interface ApiResponse<T> {
   success: boolean;
   msg: string;

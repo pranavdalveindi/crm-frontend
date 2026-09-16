@@ -106,3 +106,4 @@ src/
 2. **API Calls**: Always import `api` from `@/lib/api` to inherit cookie headers & 401 handling.
 3. **Tailwind v4**: Ensure `src/app/globals.css` keeps `@import "tailwindcss";`.
 4. **Verification**: Run `npm run build` after changes.
+
