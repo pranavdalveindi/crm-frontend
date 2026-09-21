@@ -20,7 +20,7 @@ export interface Rule {
   name: string;
   description?: string;
   eventType: number;
-  condition: Record<string, unknown>;
+  condition: Record<string, any>;
   lookbackDays: number;
   priority: Priority;
   isActive: boolean;
@@ -87,36 +87,38 @@ export interface RulePreview {
   matchedCount: number;
   matchedHouseholds: {
     deviceId: string;
-    hhid?: string;
-    contactName?: string;
-    city?: string;
-    region?: string;
+    householdId?: string | null;
+    hhid?: string | null;
+    contactName?: string | null;
+    city?: string | null;
+    region?: string | null;
     daysAffected: number;
     reason: string;
   }[];
 }
-
-export interface SchemaField {
-  name: string;
-  label: string;
-  type: "boolean" | "number" | "string";
-  operators: string[];
-  defaultOperator: string;
-  defaultValue?: boolean | number | string;
-}
-
-export interface EventTypeSchema {
-  eventType: number;
-  name: string;
-  category: string;
-  description: string;
-  fields: SchemaField[];
-}
-
-export type RuleSchema = EventTypeSchema[];
 
 export interface ApiResponse<T> {
   success: boolean;
   msg: string;
   data: T;
 }
+
+// ── Rule Schema Types (used by Rules Management page) ─────────────────────────
+
+export interface RuleFieldSchema {
+  name: string;
+  label: string;
+  type: "boolean" | "number" | "string" | "array_member" | "array_guest" | "absence";
+  description?: string;
+  operators: string[];
+  defaultOperator: string;
+  defaultValue?: any;
+}
+
+export type RuleSchema = {
+  eventType: number;
+  name: string;
+  category: string;
+  description: string;
+  fields: RuleFieldSchema[];
+}[];
